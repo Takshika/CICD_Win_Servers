@@ -1,0 +1,17 @@
+---
+- name: Setting Facts
+  set_fact:
+    ansible_port: 5985
+    ansible_connection: winrm
+    ansible_winrm_transport: ntlm
+    ansible_winrm_message_encryption: always
+    ansible_winrm_server_cert_validation: ignore
+    ansible_winrm_scheme: http
+
+
+
+- name: Save the result of 'whoami' in 'whoami_out'
+  win_command: whoami
+  register: whoami_out
+
+- debug: msg="{{ whoami_out.stdout }}"
